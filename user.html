@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url("treetrunk.webp") no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #A52A2A;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #8B0000;
+        }
+            </style>
+</head>
+<body>
+    <div class="container">
+        <button class="home-button" onclick="goHome()">Home</button>
+        <h1>Register</h1>
+        <form action="UI.php" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <label for="payment">Payment:</label>
+            <input type="text" id="payment" name="payment" required>
+
+            <label for="type_of_work">Type of Work:</label>
+            <select id="type_of_work" name="type_of_work" required>
+                <option value="Cleaning">Cleaning</option>
+                <option value="Gardening">Gardening</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Security">Security</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="contact_number">Contact Number:</label>
+            <input type="text" id="contact_number" name="contact_number" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        function goHome() {
+            window.location.href = 'org index.html'; // Adjust the href to match the actual homepage URL
+        }
+    </script>
+</body>
+</html>

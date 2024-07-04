@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url('treetrunk.webp');
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #A52A2A; 
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .container h1 {
+            text-align: center;
+            margin: 0;
+            animation: popout 1s ease-out;
+        }
+        @keyframes popout {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .add-button {
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #A52A2A;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-button:hover {
+            background-color: #8B0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<button class="home-button" onclick="goHome()">Home</button>
+
+        <h1>Order Details</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Contact Number</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody id="orderTableBody">
+                <tr>
+                    <td contenteditable="true">rajesh</td>
+                    <td contenteditable="true">1234567891</td>
+                    <td contenteditable="true">dammaiguda</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="add-button" onclick="addRow()">Add Order</button>
+    </div>
+
+    <script>
+function goHome() {
+            window.location.href = 'org index.html'; // Adjust the href to match the actual homepage URL
+        }
+
+        function addRow() {
+            const tableBody = document.getElementById('orderTableBody');
+            const newRow = document.createElement('tr');
+
+            newRow.innerHTML = `
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+            `;
+
+            tableBody.appendChild(newRow);
+        }
+    </script>
+</body>
+</html>

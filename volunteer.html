@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteers List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url("treetrunk.webp") no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8); /
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center; 
+        }
+        th {
+            background-color: #A52A2A; 
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .container h1 {
+            text-align: center;
+            margin: 0;
+            animation: popout 1s ease-out;
+        }
+        @keyframes popout {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Volunteers List</h1>
+        
+        <button onclick="toggleCalls()">Contact</button>
+<button class="home-button" onclick="goHome()">Home</button>
+
+
+        <table id="volunteersTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th id="callsHeader" style="display: none;">Contact Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="volunteer-name"> </td>
+                    <td id="volunteer-contact" style="display: none;"> </td>
+                </tr>
+                
+                <tr>
+                    <td id="volunteer-name"> </td>
+                    <td id="volunteer-contact" style="display: none;"> </td>
+                </tr>
+                <tr>
+                    <td id="volunteer-name"> </td>
+                    <td id="volunteer-contact" style="display: none;"> </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+
+    <script>
+function goHome() {
+            window.location.href = 'org index.html'; // Adjust the href to match the actual homepage URL
+        }
+
+        function toggleCalls() {
+            var callsHeader = document.getElementById('callsHeader');
+            var volunteerContact = document.getElementById('volunteer-contact');
+            
+            if (callsHeader.style.display === 'none') {
+                callsHeader.style.display = 'table-cell';
+                volunteerContact.style.display = 'table-cell';
+            } else {
+                callsHeader.style.display = 'none';
+                volunteerContact.style.display = 'none';
+            }
+        }
+
+        // Load profile details from local storage on page load
+        window.onload = function() {
+            const savedName = localStorage.getItem('profileName');
+            const savedPhone = localStorage.getItem('profilePhone');
+
+            if (savedName) {
+                document.getElementById('volunteer-name').innerText = savedName;
+            }
+            if (savedPhone) {
+                document.getElementById('volunteer-contact').innerText = savedPhone;
+            }
+        }
+    </script>
+</body>
+</html>

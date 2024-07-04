@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('img.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+        }
+
+        .navbar {
+            background-color: #24292e;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 1rem;
+            cursor: pointer;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .navbar a.logout {
+            float: right;
+            background-color: #1a96b5; 
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .content {
+            padding: 2rem;
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .content h1, .content h2 {
+            color: #333;
+        }
+
+        .payment-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .payment-form h3 {
+            margin-bottom: 1rem;
+        }
+
+        .payment-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .payment-form input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .payment-form button {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .payment-form button:hover {
+            background-color: #218838;
+        }
+
+        .payment-form .scan-option {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .payment-form .scan-option img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .payment-options button {
+            flex: 1;
+            margin: 0 0.5rem;
+        }
+
+        .transparent-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .transparent-box p {
+            margin: 0.5rem 0;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .profile-header {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: block;
+            margin: 20px auto;
+            border: 5px solid #4CAF50;
+        }
+
+        .profile-info {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .profile-info h2 {
+            margin: 10px 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+            color: #777;
+        }
+
+        .edit-button {
+            display: block;
+            width: 100px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .edit-form {
+            display: none;
+            margin: 20px 0;
+        }
+
+        .edit-form label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        .edit-form input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .save-button {
+            display: block;
+            width: 100px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a onclick="showSection('home')">Home</a>
+        <div class="dropdown">
+            <a>Services</a>
+            <div class="dropdown-content">
+               <a href="Playground.html">Playground</a>
+<a href="streets.html">Streets</a>
+<a href="roads.html">Roads</a>
+ <a href="house based.html">House Based Services</a>
+
+
+            </div>
+        </div>
+        
+         <a onclick="showSection('payment')">Payment</a>
+        <a onclick="showSection('contact')">Contact</a>
+        <a onclick="showSection('profile')">Profile</a>
+        <a href="login.html" class="logout">Logout</a> 
+    </div>
+
+    <div id="home" class="content active">
+        <h1>Welcome to the User Page</h1>
+    </div>
+
+    <div id="playground" class="content">
+        <h2>Playground Services</h2>
+        <p>Details about playground services.</p>
+    </div>
+
+    <div id="streets" class="content">
+        <h2>Street Services</h2>
+        <p>Details about street services.</p>
+    </div>
+
+    <div id="roads" class="content">
+        <h2>Road Services</h2>
+        <p>Details about road services.</p>
+    </div>
+
+    <div id="house" class="content">
+        <h2>House Based Services</h2>
+        <p>Details about house-based services.</p>
+    </div>
+
+    <div id="payment" class="content">
+        <h2>Payment</h2>
+        <div class="payment-form">
+            <h3>Payment Information</h3>
+            <form>
+                <label for="name">Name on Card</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" name="card-number" required>
+                
+                <label for="expiry-date">Expiration Date</label>
+                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+                
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" required>
+                
+                <button type="submit">Submit Payment</button>
+            </form>
+            <div class="payment-options">
+                <button onclick="redirectTo('https://www.phonepe.com/')">PhonePe</button>
+                <button onclick="redirectTo('https://pay.google.com/')">Google Pay</button>
+            </div>
+            <div class="scan-option">
+                <h4>Scan to Pay</h4>
+                <img src="scan.jpeg" alt="QR Code">
+            </div>
+        </div>
+    </div>
+
+<div id="contact" class="content">
+<div class="transparent-box">
+        <h2>Contact:</h2>
+        <p>NAME: Rajkumar</p>
+        <p>ADDRESS: Cheeryala</p>
+        <p>PHONE: +919876543210</p>
+        <p>EMAIL: rajkumar888@gmail.com<p/>
+    </div>
+</div>
+
+<div id="profile" class="content">
+    <div class="profile-container">
+        <div class="profile-header">
+            <h2>User Profile</h2>
+        </div>
+        <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img" id="profile-image">
+        <div class="profile-info">
+            <h2 id="profile-name">John Doe</h2>
+            <p id="profile-email">Email: john.doe@example.com</p>
+            <p id="profile-phone">Phone: +123 456 7890</p>
+        </div>
+        <button class="edit-button" onclick="showEditForm()">Edit</button>
+        <div class="edit-form">
+            <label for="edit-name">Name</label>
+            <input type="text" id="edit-name" value="John Doe">
+            
+            <label for="edit-email">Email</label>
+            <input type="email" id="edit-email" value="john.doe@example.com">
+            
+            <label for="edit-phone">Phone</label>
+            <input type="tel" id="edit-phone" value="+123 456 7890">
+
+            <!-- Add profile image upload option -->
+            <label for="image-input">Profile Image</label>
+            <input type="file" id="image-input" accept="image/*" onchange="previewImage(event)">
+            
+            <button class="save-button" onclick="saveProfile()">Save</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.content');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    function showEditForm() {
+        document.querySelector('.edit-form').style.display = 'block';
+    }
+
+    function saveProfile() {
+        const newName = document.getElementById('edit-name').value;
+        const newEmail = document.getElementById('edit-email').value;
+        const newPhone = document.getElementById('edit-phone').value;
+        
+        document.getElementById('profile-name').innerText = newName;
+        document.getElementById('profile-email').innerText = `Email: ${newEmail}`;
+        document.getElementById('profile-phone').innerText = `Phone: ${newPhone}`;
+        
+        document.querySelector('.edit-form').style.display = 'none';
+
+        // Save profile details to local storage
+        localStorage.setItem('profileName', newName);
+        localStorage.setItem('profileEmail', newEmail);
+        localStorage.setItem('profilePhone', newPhone);
+    }
+
+    // Function to preview the selected image before uploading
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const image = document.getElementById('profile-image');
+            image.src = reader.result;
+            // Save profile image to local storage
+            localStorage.setItem('profileImage', reader.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Load profile details from local storage on page load
+    window.onload = function() {
+        const savedName = localStorage.getItem('profileName');
+        const savedEmail = localStorage.getItem('profileEmail');
+        const savedPhone = localStorage.getItem('profilePhone');
+        const savedImage = localStorage.getItem('profileImage');
+
+        if (savedName) {
+            document.getElementById('profile-name').innerText = savedName;
+        }
+        if (savedEmail) {
+            document.getElementById('profile-email').innerText = `Email: ${savedEmail}`;
+        }
+        if (savedPhone) {
+            document.getElementById('profile-phone').innerText = `Phone: ${savedPhone}`;
+        }
+        if (savedImage) {
+            document.getElementById('profile-image').src = savedImage;
+        }
+    }
+</script>
+
+</body>
+</html>
+
